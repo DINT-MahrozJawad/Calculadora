@@ -23,26 +23,32 @@ namespace Calculadora
         public MainWindow()
         {
             InitializeComponent();
+            Operando1.Text = "0";
+            Operando2.Text = "0";
         }
 
         private void RadioButton_Checked_Suma(object sender, RoutedEventArgs e)
         {
-
+            Resultado.Text = (double.Parse(Operando1.Text) + double.Parse(Operando2.Text)).ToString();
         }
 
         private void RadioButton_Checked_Resta(object sender, RoutedEventArgs e)
         {
-
+            Resultado.Text = (double.Parse(Operando1.Text) - double.Parse(Operando2.Text)).ToString();
         }
 
         private void RadioButton_Checked_Multiplicacion(object sender, RoutedEventArgs e)
         {
-
+            Resultado.Text = (double.Parse(Operando1.Text) * double.Parse(Operando2.Text)).ToString();
         }
 
         private void RadioButton_Checked_Division(object sender, RoutedEventArgs e)
         {
-
+            if (Operando2.Text != "0")
+                Resultado.Text = $"{(double.Parse(Operando1.Text) / double.Parse(Operando2.Text)).ToString()}:F2";
+            else
+                Resultado.Text = "Error";
         }
+
     }
 }
