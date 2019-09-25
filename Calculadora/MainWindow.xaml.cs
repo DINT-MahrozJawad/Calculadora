@@ -33,51 +33,40 @@ namespace Calculadora
             Suma.IsChecked = true;
         }
 
-        private void RadioButton_Checked_Suma(object sender, RoutedEventArgs e)
+        private void RadioButton_Checked(object sender, RoutedEventArgs e)
         {
-            if(Operando1.Text != "" && Operando2.Text != "")
-                Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
+            Calcular();
         }
 
-        private void RadioButton_Checked_Resta(object sender, RoutedEventArgs e)
+        private void Calcular()
         {
-            if (Operando1.Text != "" && Operando2.Text != "")
-                Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
-        }
-
-        private void RadioButton_Checked_Multiplicacion(object sender, RoutedEventArgs e)
-        {
-            if (Operando1.Text != "" && Operando2.Text != "")
-                Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) * double.Parse(Operando2.Text),2).ToString()}";
-        }
-
-        private void RadioButton_Checked_Division(object sender, RoutedEventArgs e)
-        {
-            if (Operando1.Text != "" && Operando2.Text != "" && Operando2.Text != "0")
-                Resultado.Text = $"{Math.Round((double.Parse(Operando1.Text) / double.Parse(Operando2.Text)),2).ToString()}";
-            else
-                Resultado.Text = "Error";
+            if (Suma.IsChecked == true)
+            {
+                if (Operando1.Text != "" && Operando2.Text != "" && !double.TryParse(Operando1.Text, out double r))
+                    Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) + double.Parse(Operando2.Text), 2).ToString()}";
+            }
+            else if (Resta.IsChecked == true)
+            {
+                if (Operando1.Text != "" && Operando2.Text != "")
+                    Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
+            }
+            else if (Multiplicacion.IsChecked == true)
+            {
+                if (Operando1.Text != "" && Operando2.Text != "")
+                    Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) * double.Parse(Operando2.Text), 2).ToString()}";
+            }
+            else if (Division.IsChecked == true)
+            {
+                if (Operando1.Text != "" && Operando2.Text != "" && Operando2.Text != "0")
+                    Resultado.Text = $"{Math.Round((double.Parse(Operando1.Text) / double.Parse(Operando2.Text)), 2).ToString()}";
+                else
+                    Resultado.Text = "Error";
+            }
         }
 
         private void Operando_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (Suma.IsChecked == true)
-            {
-                RadioButton_Checked_Suma(sender, e);
-            }
-            else if (Resta.IsChecked == true)
-            {
-                RadioButton_Checked_Resta(sender, e);
-            }
-            else if (Multiplicacion.IsChecked == true)
-            {
-                RadioButton_Checked_Multiplicacion(sender, e);
-            }
-            else if (Division.IsChecked == true)
-            {
-                RadioButton_Checked_Division(sender, e);
-            }
-
+            Calcular();
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
