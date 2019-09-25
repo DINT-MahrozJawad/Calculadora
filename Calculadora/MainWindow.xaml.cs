@@ -25,30 +25,55 @@ namespace Calculadora
             InitializeComponent();
             Operando1.Text = "0";
             Operando2.Text = "0";
+            Resultado.Text = "0";
+            Suma.IsChecked = true;
         }
 
         private void RadioButton_Checked_Suma(object sender, RoutedEventArgs e)
         {
-            Resultado.Text = (double.Parse(Operando1.Text) + double.Parse(Operando2.Text)).ToString();
+            if(Operando1.Text != "" && Operando2.Text != "")
+                Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
         }
 
         private void RadioButton_Checked_Resta(object sender, RoutedEventArgs e)
         {
-            Resultado.Text = (double.Parse(Operando1.Text) - double.Parse(Operando2.Text)).ToString();
+            if (Operando1.Text != "" && Operando2.Text != "")
+                Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
         }
 
         private void RadioButton_Checked_Multiplicacion(object sender, RoutedEventArgs e)
         {
-            Resultado.Text = (double.Parse(Operando1.Text) * double.Parse(Operando2.Text)).ToString();
+            if (Operando1.Text != "" && Operando2.Text != "")
+                Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) * double.Parse(Operando2.Text),2).ToString()}";
         }
 
         private void RadioButton_Checked_Division(object sender, RoutedEventArgs e)
         {
-            if (Operando2.Text != "0")
-                Resultado.Text = $"{(double.Parse(Operando1.Text) / double.Parse(Operando2.Text)).ToString()}:F2";
+            if (Operando1.Text != "" && Operando2.Text != "")
+                Resultado.Text = $"{Math.Round((double.Parse(Operando1.Text) / double.Parse(Operando2.Text)),2).ToString()}";
             else
                 Resultado.Text = "Error";
         }
 
+        private void Operando_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (Suma.IsChecked == true)
+            {
+                RadioButton_Checked_Suma(sender, e);
+            }
+            else if (Resta.IsChecked == true)
+            {
+                RadioButton_Checked_Suma(sender, e);
+            }
+            else if (Multiplicacion.IsChecked == true)
+            {
+                RadioButton_Checked_Suma(sender, e);
+            }
+            else if (Division.IsChecked == true)
+            {
+                RadioButton_Checked_Suma(sender, e);
+            }
+
+        }
     }
 }
