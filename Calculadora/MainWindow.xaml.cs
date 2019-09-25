@@ -40,28 +40,36 @@ namespace Calculadora
 
         private void Calcular()
         {
-            if (Suma.IsChecked == true)
+            if (double.TryParse(Operando1.Text, out double n) && double.TryParse(Operando2.Text, out double r))
             {
-                if (Operando1.Text != "" && Operando2.Text != "" && !double.TryParse(Operando1.Text, out double r))
-                    Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) + double.Parse(Operando2.Text), 2).ToString()}";
+                if (Suma.IsChecked == true)
+                {
+                    if (Operando1.Text != "" && Operando2.Text != "")
+                        Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) + double.Parse(Operando2.Text), 2).ToString()}";
+                }
+                else if (Resta.IsChecked == true)
+                {
+                    if (Operando1.Text != "" && Operando2.Text != "")
+                        Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
+                }
+                else if (Multiplicacion.IsChecked == true)
+                {
+                    if (Operando1.Text != "" && Operando2.Text != "")
+                        Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) * double.Parse(Operando2.Text), 2).ToString()}";
+                }
+                else if (Division.IsChecked == true)
+                {
+                    if (Operando1.Text != "" && Operando2.Text != "" && Operando2.Text != "0")
+                        Resultado.Text = $"{Math.Round((double.Parse(Operando1.Text) / double.Parse(Operando2.Text)), 2).ToString()}";
+                    else
+                        Resultado.Text = "Error";
+                }
             }
-            else if (Resta.IsChecked == true)
+            else
             {
-                if (Operando1.Text != "" && Operando2.Text != "")
-                    Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) - double.Parse(Operando2.Text), 2).ToString()}";
+                Resultado.Text = "Error";
             }
-            else if (Multiplicacion.IsChecked == true)
-            {
-                if (Operando1.Text != "" && Operando2.Text != "")
-                    Resultado.Text = $"{Math.Round(double.Parse(Operando1.Text) * double.Parse(Operando2.Text), 2).ToString()}";
-            }
-            else if (Division.IsChecked == true)
-            {
-                if (Operando1.Text != "" && Operando2.Text != "" && Operando2.Text != "0")
-                    Resultado.Text = $"{Math.Round((double.Parse(Operando1.Text) / double.Parse(Operando2.Text)), 2).ToString()}";
-                else
-                    Resultado.Text = "Error";
-            }
+
         }
 
         private void Operando_TextChanged(object sender, TextChangedEventArgs e)
